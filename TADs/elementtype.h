@@ -9,7 +9,7 @@ typedef struct {
     char brand[50];
     char model[50];
     char location[50];
-    TCOLA works;
+    TQUEUE works;
 } PRINTER;
 ///////////////////////////////////////////////////
 

@@ -91,7 +91,8 @@ int main(int argc, char** argv){
                     actual = nextList(Printers, actual);
                 }
                 fclose(PrintersList); 
-                printf("Updated list.\n"),
+                printf("Updated list.\n");
+                //DESTROY QUEUE
                 destroyList(&Printers);
                 printf("Exiting...\n");
                 break;
