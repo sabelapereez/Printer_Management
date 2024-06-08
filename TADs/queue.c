@@ -39,7 +39,7 @@ int isEmptyQueue(TQUEUE q) {
 }
 
 /**
- * Conaults the first element of the queue [q], if any, and stores it in [e], without removing it from the queue.
+ * Consults the first element of the queue [q], if any, and stores it in [e], without removing it from the queue.
  *
  * @param q queue from which to extract the first element.
  * @param e variable where to store the first element of the queue.

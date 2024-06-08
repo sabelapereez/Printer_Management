@@ -13,93 +13,93 @@ typedef void *TPOSITION;
 typedef void *TLIST;
 
 /**
- * Reserva memoria para una lista de datos con el tipo [LISTELEMENTTYPE].
+ * Reserves memory for a list of data with type [LISTELEMENTTYPE].
  *
- * @param q puntero a la lista a crear.
+ * @param q pointer to the list to create.
  */
-void crearLista(TLIST *l);
+void createList(TLIST *l);
 
 /**
- * Destruye (libera la memoria reservada) la lista [l] y todos los elementos que almacena.
+ * Destroys (frees reserved memory) the list [l] and all the elements it stores.
  *
- * @param l puntero a la lista a destruir.
+ * @param l pointer to the list to destroy.
  */
-void destruirLista(TLIST *l);
+void destroyList(TLIST *l);
 
 /**
- * Comprueba si la lista [l] esta vacia.
+ * Checks if list [l] is empty.
  *
- * @param l lista a comprobar si esta vacia.
- * @return 1 si la lista esta vacia, 0 en otro caso.
+ * @param l list to check if it is empty.
+ * @return 1 if the list is empty, 0 otherwise.
  */
-int esListaVacia(TLIST l);
+int isEmptyList(TLIST l);
 
 /**
- * Recupera la primera posicion de la lista.
+ * Consults the first element of the list [l], and returns it.
  *
- * @param l lista de la cual recuperar la primera posicion.
- * @return la primera posicion tipo [TPOSICION] de la lista [l].
+ * @param l list from which to recover the first position.
+ * @return the first position [TPOSITION] of the list [l].
  */
-TPOSITION primeroLista(TLIST l);
+TPOSITION firstList(TLIST l);
 
 /**
- * Recupera la posicion del fin de la lista.
+ * Consults the last element of the list [l], and returns it.
  *
- * @param l lista de la cual recuperar su final.
- * @return la posicion del fin tipo [TPOSICION] de la lista [l].
+ * @param l list from which to recover the last position.
+ * @return the last position [TPOSITION] of the list [l].
  */
-TPOSITION finLista(TLIST l);
+TPOSITION endList(TLIST l);
 
 /**
- * Devuelve la posicion siguiente a [p] en la lista [l].
+ * Returns the position next to [p] in list [l].
  *
- * @param l lista en la cual se va a buscar la siguiente posicion.
- * @param p posicion referencia para devolver la siguiente.
- * @return la posicion siguiente a [p].
+ * @param l list from which the next position will be searched.
+ * @param p reference position to return the next one.
+ * @return the position following [p].
  */
-TPOSITION siguienteLista(TLIST l, TPOSITION p);
+TPOSITION nextList(TLIST l, TPOSITION p);
 
 /**
- * Recupera el elemento almacenado en la posicion [p] pasada por argumento.
+ * Returns the element stored at position [p] passed by argument.
  *
- * @param l lista de la cual recuperar el elemento.
- * @param p posicion de la cual recuperar el elemento.
- * @param e puntero a la variable en la cual almacenar el elemento recuperado.
+ * @param l list from which to retrieve the element.
+ * @param p position from which to retrieve the element.
+ * @param e pointer to the variable in which to store the retrieved element.
  */
-void recuperarElementoLista(TLIST l, TPOSITION p, LISTELEMENTTYPE *e);
+void retrieveListItem(TLIST l, TPOSITION p, LISTELEMENTTYPE *e);
 
 /**
- * Consulta la longitud de la lista [l].
+ * Consults the length of the list [l].
  *
- * @param l lista de la cual consultar la longitud.
- * @return entero con el valor de la longitud de la lista.
+ * @param l list of which to consult the length.
+ * @return integer with the value of the length of the list.
  */
-int longitudLista(TLIST l);
+int lengthList(TLIST l);
 
 /**
- * Inserta el elemento [e] en la posicion siguiente a la posicion [p] de la lista [l].
+ * Inserts the element [e] in the position following position [p] of the list [l].
  *
- * @param l puntero a la lista en la cual se va a insertar el elemento.
- * @param p posicion despues de la cual se insertara el elemento.
- * @param e elemento a insertar.
+ * @param l pointer to the list into which the element is inserted.
+ * @param p position after which the element will be inserted.
+ * @param e element to insert.
  */
-void insertarElementoLista(TLIST *l, TPOSITION p, LISTELEMENTTYPE e);
+void insertListElement(TLIST *l, TPOSITION p, LISTELEMENTTYPE e);
 
 /**
- * Suprime el elemento en posicion [p] de la lista [l].
+ * Deletes the element at position [p] from list [l].
  *
- * @param l puntero a la lista de la que se suprimira el elemento.
- * @param p posicion del elemento a suprimir.
+ * @param l pointer to the list from which the element will be deleted.
+ * @param p position of the element to be deleted.
  */
-void suprimirElementoLista(TLIST *l, TPOSITION p);
+void deleteElementList(TLIST *l, TPOSITION p);
 
 /**
- * Modifica el valor del elemento almacenado en la posicion [p] guardando el nuevo elemento [e].
+ * Modifies the value of the element stored at position [p] by saving the new element [e].
  *
- * @param l puntero a la lista de la cual se va a modificar el elemento.
- * @param p posicion del valor que se va a modificar.
- * @param e nuevo valor a guardar en la posicion [p].
+ * @param l pointer to the list from which the element will be modified.
+ * @param p position of the value to be modified.
+ * @param e new value to save in position [p].
  */
-void modificarElementoLista(TLIST *l, TPOSITION p, LISTELEMENTTYPE e);
+void modifyItemList(TLIST *l, TPOSITION p, LISTELEMENTTYPE e);
 
 #endif
