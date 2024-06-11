@@ -135,7 +135,7 @@ void insertListElement(TLIST *l, TPOSITION p, LISTELEMENTTYPE e){
  * @param l pointer to the list from which the element will be deleted.
  * @param p position of the element to be deleted.
  */
-void deleteElementList(TLIST *l, TPOSITION p){
+void deleteListElement(TLIST *l, TPOSITION p){
     TPOSITION q;
 
     q = p->next;
