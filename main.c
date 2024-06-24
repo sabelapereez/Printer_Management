@@ -1,104 +1,110 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "cola.h"
-#include "lista.h"
-#include "impresoras.h"
+#include "queue.h"
+#include "list.h"
+#include "printers.h"
 
 int main(int argc, char** argv){
-    FILE *ListaImpresoras;
-    TLISTA Impresoras;
-    TIPOELEMENTOLISTA elem;
-    char bin[200], opcion;
+    FILE *PrintersList;
+    TLIST Printers;
+    LISTELEMENTTYPE elem;
+    char bin[200], option;
 
-    //Introducción de parámetros
+    //Prameter introduction
     if(argc != 2){
-        perror("Error en los parámetros introducidos.");
+        perror("Error in the entered parameters.");
         exit(1);
     }
 
-    //Apertura archivo
-    if ((ListaImpresoras = fopen(argv[1], "r")) == NULL){
-        perror("Error en la lectura del archivo.");
+    //File opening
+    if ((PrintersList = fopen(argv[1], "r")) == NULL){
+        perror("File reading error.");
         exit(2);
     }
 
-    //Creación de la lista e inserción de los elementos
-    crearLista(&Impresoras);
-    TPOSICION actual = primeroLista(Impresoras);
-    fseek(ListaImpresoras, 0, SEEK_SET);
-    while(fgets(bin, 200, ListaImpresoras) != NULL){
-        sscanf(bin, "%s %s %s %s", elem.nombre, elem.marca, elem.modelo, elem.ubicacion);
-        crearCola(&elem.trabajos);
-        insertarElementoLista(&Impresoras, actual, elem);
-        actual = siguienteLista(Impresoras, actual);
+    //List creation and insertion of the elements.
+    createList(&Printers);
+    TPOSITION actual = firstList(Printers);
+    fseek(PrintersList, 0, SEEK_SET);
+    while(fgets(bin, 200, PrintersList) != NULL){
+        sscanf(bin, "%s %s %s %s", elem.name, elem.brand, elem.model, elem.location);
+        createQueue(&elem.works);
+        insertListElement(&Printers, actual, elem);
+        actual = nextList(Printers, actual);
     }
-    fclose(ListaImpresoras); 
-    imprimirlista(Impresoras);
+    fclose(PrintersList); 
+    printlist(Printers);
 
     do{
+        printf("\nMenu\n");
         printf("~~~~~~~~~~~~~~~~\n"); 
-        printf("a) Eliminar impresora\n"); 
-        printf("b) Añadir impresora\n");
-        printf("c) Enviar traballo\n");
-        printf("d) Listado traballos pendentes\n");
-        printf("e) Imprimir traballo\n");
-        printf("f) Buscar impresora\n"); 
-        printf("s) Salir\n"); 
+        printf("a) Delete printer\n"); 
+        printf("b) Add printer\n");
+        printf("c) Send work\n");
+        printf("d) Pending jobs list\n");
+        printf("e) Print work\n");
+        printf("f) Find printer\n"); 
+        printf("g) Print list\n");
+        printf("s) Exit\n"); 
         printf("~~~~~~~~~~~~~~~~\n");
-        printf("Opcion: ");
-        scanf(" %c", &opcion);
-        switch (opcion){
+        printf("Option: ");
+        scanf(" %c", &option);
+        switch (option){
             case 'a': 
             case 'A':
-                eliminarelemento(Impresoras);
-                imprimirlista(Impresoras);
+                deleteelement(Printers);
+                printlist(Printers);
                 break;
             case 'b':
             case 'B':
-                nuevoelemento(Impresoras);
-                imprimirlista(Impresoras);
+                newelement(Printers);
+                printlist(Printers);
                 break;
             case 'c':
             case 'C':
-                añadirtrabajo(Impresoras);
+                addjob(Printers);
                 break;
             case 'd':
             case 'D':
-                trabajospendientes(Impresoras);
+                pendingjobs(Printers);
                 break;
             case 'e':
             case 'E':
-                imprimirtrabajo(Impresoras);
+                printjob(Printers);
                 break;
             case 'f':
             case 'F':
-                impresoraspocacarga(Impresoras);
+                printerslowload(Printers);
+                break;
+            case 'g':
+            case 'G':
+                printlist(Printers);
                 break;
             case 's': 
             case 'S':
-                //Apertura del archivo
-                if ((ListaImpresoras = fopen(argv[1], "w")) == NULL){
-                    perror("Error en la lectura del archivo.");
+                //File opening
+                if ((PrintersList = fopen(argv[1], "w")) == NULL){
+                    perror("File reading error.");
                     exit(2);
                 }
-                //Actualización del archivo con los elementos de la lista
-                actual = primeroLista(Impresoras);
-                fseek(ListaImpresoras, 0, SEEK_SET);
-                while(actual != finLista(Impresoras)){
-                    recuperarElementoLista(Impresoras, actual, &elem);
-                    fprintf(ListaImpresoras, "%s %s %s %s\n", elem.nombre, elem.marca, elem.modelo, elem.ubicacion);
-                    actual = siguienteLista(Impresoras, actual);
+                //File updating with the list elements
+                actual = firstList(Printers);
+                fseek(PrintersList, 0, SEEK_SET); 
+                while(actual != endList(Printers)){
+                    retrieveListItem(Printers, actual, &elem);
+                    fprintf(PrintersList, "%s %s %s %s\n", elem.name, elem.brand, elem.model, elem.location);
+                    actual = nextList(Printers, actual);
                 }
-                fclose(ListaImpresoras); 
-                printf("Lista actualizada\n"),
-                destruirLista(&Impresoras);
-                printf("Fin del programa.\n");
+                fclose(PrintersList); 
+                printf("Updated list.\n");
+                destroyList(&Printers);
+                printf("Exiting...\n");
                 break;
             default:
-                printf("No se incluye esa opción.\n");
+                printf("Wrong option.\n");
                 break;
         }
-    } while (opcion != 's' && opcion != 'S');
+    } while (option != 's' && option != 'S');
     return(EXIT_SUCCESS);
 }
