@@ -7,7 +7,7 @@
 typedef PRINTER LISTELEMENTTYPE;
 
 /** Structure for a list node **/
-typedef struct nodoLista {
+typedef struct ListNode {
     LISTELEMENTTYPE element;
     struct ListNode *next;
 } STLISTNODE;
@@ -41,8 +41,9 @@ void createList(TLIST *l) {
  */
 void destroyList(TLIST *l) {
     (*l)->end = (*l)->start;
-    while ((*l)->end != NULL) {
+    while ((*l)->end->next != NULL) {
         (*l)->end = (*l)->end->next;
+        destroyQueue(&((*l)->end)->element.works);
         free((*l)->start);
         (*l)->start = (*l)->end;
     }

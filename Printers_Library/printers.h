@@ -16,16 +16,16 @@ void newelement(TLIST l);
 //Prints the elements in the print queue
 void printqueue(TQUEUE c);
 
-//Añade un trabajo a la cola de impresión 
-void añadirtrabajo(TLISTA l);
+//Adds a job into the print queue
+void addjob(TLIST l);
 
-//Imprime los trabajos de la cola de impresión 
-void trabajospendientes(TLISTA l);
+//Prints the jobs from the print queue
+void pendingjobs(TLIST l);
 
-//Elimina el trabajo de la cola que entró antes
-void imprimirtrabajo(TLISTA l);
+//Deletes a job from the queue
+void printjob(TLIST l);
 
-//Busca las impresoras con menos trabajos en la cola de impresión 
-void impresoraspocacarga(TLISTA l);
+//Find the printers with the fewest jobs in the print queue
+void printerslowload(TLIST l);
 
 #endif

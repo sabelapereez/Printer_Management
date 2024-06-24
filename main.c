@@ -37,6 +37,7 @@ int main(int argc, char** argv){
     printlist(Printers);
 
     do{
+        printf("\nMenu\n");
         printf("~~~~~~~~~~~~~~~~\n"); 
         printf("a) Delete printer\n"); 
         printf("b) Add printer\n");
@@ -44,6 +45,7 @@ int main(int argc, char** argv){
         printf("d) Pending jobs list\n");
         printf("e) Print work\n");
         printf("f) Find printer\n"); 
+        printf("g) Print list\n");
         printf("s) Exit\n"); 
         printf("~~~~~~~~~~~~~~~~\n");
         printf("Option: ");
@@ -51,29 +53,33 @@ int main(int argc, char** argv){
         switch (option){
             case 'a': 
             case 'A':
-                deleteitem(Printers);
+                deleteelement(Printers);
                 printlist(Printers);
                 break;
             case 'b':
             case 'B':
-                newitem(Printers);
+                newelement(Printers);
                 printlist(Printers);
                 break;
             case 'c':
             case 'C':
-                addwork(Printers);
+                addjob(Printers);
                 break;
             case 'd':
             case 'D':
-                pendingworks(Printers);
+                pendingjobs(Printers);
                 break;
             case 'e':
             case 'E':
-                printwork(Printers);
+                printjob(Printers);
                 break;
             case 'f':
             case 'F':
-                lowloadprinters(Printers);
+                printerslowload(Printers);
+                break;
+            case 'g':
+            case 'G':
+                printlist(Printers);
                 break;
             case 's': 
             case 'S':
@@ -85,14 +91,13 @@ int main(int argc, char** argv){
                 //File updating with the list elements
                 actual = firstList(Printers);
                 fseek(PrintersList, 0, SEEK_SET); 
-                while(actual != lastList(Printers)){
+                while(actual != endList(Printers)){
                     retrieveListItem(Printers, actual, &elem);
                     fprintf(PrintersList, "%s %s %s %s\n", elem.name, elem.brand, elem.model, elem.location);
                     actual = nextList(Printers, actual);
                 }
                 fclose(PrintersList); 
                 printf("Updated list.\n");
-                //DESTROY QUEUE
                 destroyList(&Printers);
                 printf("Exiting...\n");
                 break;

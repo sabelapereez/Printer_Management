@@ -59,7 +59,7 @@ void FirstItemQueue(TQUEUE q, QUEUEELEMENTTYPE *e) {
  */
 void deleteQueueElement(TQUEUE *q) {
     STQUEUENODE *aux;
-    if (isEmptyQueue(q)) {
+    if (isEmptyQueue(*q)) {
         printf("\nError, queue has no elements\n");
     } else {
         aux = (*q)->start;

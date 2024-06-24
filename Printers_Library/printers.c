@@ -60,7 +60,7 @@ void newelement(TLIST l){
     scanf("%s", a.location);
     createQueue(&a.works);
     insertListElement(&l, endList(l), a);
-    printf("The printer %s has been created", a.name);
+    printf("The printer %s has been created.\n", a.name);
 }
 
 //Prints the elements in the print queue
@@ -86,77 +86,77 @@ void printqueue(TQUEUE c){
     destroyQueue(&aux);
 }
 
-//Añade un trabajo a la cola de impresión 
-void añadirtrabajo(TLIST l){
+//Adds a job into the print queue
+void addjob(TLIST l){
     char printer[50];
     QUEUEELEMENTTYPE ide;
     LISTELEMENTTYPE a;
-    TPOSITION añadir = NULL;
-    printf("Introduzca la printer a la que mandar el trabajo: ");
+    TPOSITION add = NULL;
+    printf("Enter the printer to send the job to: ");
     scanf("%s", printer);
-    añadir = searchprinter(l, printer);
-    if (añadir == NULL){
-        printf("No se ha encontrado esa printer en la lista.\n");
+    add = searchprinter(l, printer);
+    if (add == NULL){
+        printf("That printer was not found in the list.\n");
     }
     else {
-        printf("Introduzca el identificador del trabajo: ");
+        printf("Enter the job ID: ");
         scanf("%i", &ide);
-        retrieveListItem(l, añadir, &a); 
-        addQueueElement(&a.trabajos, ide); 
-        printf("Se ha añadido el trabajo a la printer %s.\n", printer);
+        retrieveListItem(l, add, &a); 
+        addQueueElement(&a.works, ide); 
+        printf("The job has been added to the printer %s.\n", printer);
     }
 }
 
-//Imprime los trabajos de la cola de impresión 
-void trabajospendientes(TLIST l){
+//Prints the jobs from the print queue
+void pendingjobs(TLIST l){
     char printer[50];
-    TPOSITION añadir = NULL;
-    printf("Introduzca la printer de la que ver los trabajos: ");
+    TPOSITION add = NULL;
+    printf("Enter the printer from which to see the works: ");
     scanf("%s", printer);
-    añadir = searchprinter(l, printer);
-    if (añadir == NULL){
-        printf("No se ha encontrado esa printer en la lista.\n");
+    add = searchprinter(l, printer);
+    if (add == NULL){
+        printf("That printer was not found in the list.\n");
     }
     else {
         LISTELEMENTTYPE a;
-        retrieveListItem(l, añadir, &a);
-        imprimircola(a.trabajos);
+        retrieveListItem(l, add, &a);
+        printqueue(a.works);
     }
 }
 
-//Elimina el trabajo de la cola que entró antes
-void imprimirtrabajo(TLIST l){
+//Deletes a job from the queue
+void printjob(TLIST l){
     char printer[50];
-    TPOSITION añadir = NULL;
-    printf("Introduzca la printer de la que imprimir el trabajo: ");
+    TPOSITION add = NULL;
+    printf("Enter the printer from which to print the job: ");
     scanf("%s", printer);
-    añadir = searchprinter(l, printer);
-    if (añadir == NULL){
-        printf("No se ha encontrado esa printer en la lista.\n");
+    add = searchprinter(l, printer);
+    if (add == NULL){
+        printf("That printer was not found in the list.\n");
     }
     else{
         LISTELEMENTTYPE a;
         QUEUEELEMENTTYPE c;
-        retrieveListItem(l, añadir, &a);
-        imprimircola(a.trabajos);
-        if(isEmptyQueue(a.trabajos) == 0){
-            FirstItemQueue(a.trabajos, &c);
-            deleteQueueElement(&a.trabajos);
-            printf("Se ha impreso el trabajo %i.\n", c);
+        retrieveListItem(l, add, &a);
+        printqueue(a.works);
+        if(isEmptyQueue(a.works) == 0){
+            FirstItemQueue(a.works, &c);
+            deleteQueueElement(&a.works);
+            printf("The job %i has been printed.\n", c);
         }
     }
 }
 
-//Busca las printers con menos trabajos en la cola de impresión 
-void printerspocacarga(TLIST l){
+//Find the printers with the fewest jobs in the print queue
+void printerslowload(TLIST l){
     LISTELEMENTTYPE a;
     TPOSITION actual = firstList(l);
     int i, m = -1;
-    retrieveListIte(l, actual, &a);
-    m = tamañocola(a.trabajos);
+    retrieveListItem(l, actual, &a);
+    m = QueueLength(a.works);
     while (actual != endList(l)){
         retrieveListItem(l, actual, &a);
-        i = tamañocola(a.trabajos);
+        i = QueueLength(a.works);
         if(i < m){
             m = i;
         }
@@ -165,7 +165,7 @@ void printerspocacarga(TLIST l){
     actual = firstList(l);
     while (actual != endList(l)){
         retrieveListItem(l, actual, &a);
-        i = tamañocola(a.trabajos);
+        i = QueueLength(a.works);
         if(i == m){
             printf("%s\n", a.name);
         }
