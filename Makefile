@@ -1,19 +1,37 @@
-CC = gcc -Wall
-HEADER_FILES_DIR = .
-INCLUDES = -I $(HEADER_FILES_DIR)
-OUTPUT = executable 
-LIB_HEADERS = $(HEADER_FILES_DIR)/queue.h $(HEADER_FILES_DIR)/list.h $(HEADER_FILES_DIR)/printers.h $(HEADER_FILES_DIR)/elementtype.h
-SRCS = main.c queue.c list.c printers.c
-OBJS = $(SRCS:.c=.o)
+CC = gcc
+TARGET = programa
+SRCDIR = .
+TADDIR = TADs
+IMPDIR = Printers_Library
 
-$(OUTPUT): $(OBJS)
-	$(CC) -o $(OUTPUT) $(OBJS)
 
-%.o: %.c $(LIB_HEADERS)
-	$(CC) -c -o $@ $< $(INCLUDES)
+SOURCES := $(wildcard $(SRCDIR)/*.c)
+OBJECTS := $(SOURCES:.c=.o)
 
-cleanall: clean
-	rm -f $(OUTPUT)
+TAD_SOURCES := $(wildcard $(TADDIR)/*.c)
+TAD_OBJECTS := $(TAD_SOURCES:.c=.o)
+
+IMP_SOURCES := $(wildcard $(IMPDIR)/*.c)
+IMP_OBJECTS := $(IMP_SOURCES:.c=.o)
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(OBJECTS) $(TAD_OBJECTS) $(IMP_OBJECTS)
+	$(CC) $^ -o $@
+
+$(SRCDIR)/%.o: $(SRCDIR)/%.c
+	$(CC) -c $< -o $@
+
+$(TADDIR)/%.o: $(TADDIR)/%.c
+	$(CC) -c $< -o $@
+
+$(IMPDIR)/%.o: $(IMPDIR)/%.c
+	$(CC) -c $< -o $@
 
 clean:
-	rm -f *.o *~
+	rm -f $(OBJECTS) $(TAD_OBJECTS) $(IMP_OBJECTS)
+
+cleanall: clean
+	rm -f  $(TARGET)
