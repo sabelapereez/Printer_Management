@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "queue.h"
-#include "list.h"
-#include "printers.h"
+#include "./TADs/queue.h"
+#include "./TADs/list.h"
+#include "./Printers_Library/printers.h"
 
 int main(int argc, char** argv){
     FILE *PrintersList;

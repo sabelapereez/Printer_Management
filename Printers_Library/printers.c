@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "list.h"
-#include "queue.h"
-#include "elementtype.h"
+#include "../TADs/list.h"
+#include "../TADs/queue.h"
+#include "../TADs/elementtype.h"
 
 //Searchs for a printer in the list (returns TPOSITION of the item)
 TPOSITION searchprinter(TLIST l, char* printer){
