@@ -1,9 +1,9 @@
-CC = gcc
-TARGET = programa
+CC = gcc -Wall
+TARGET = executable
 SRCDIR = .
 TADDIR = TADs
-IMPDIR = Printers_Library
-
+PRINTDIR = Printers_Library
+ARGS = File_Example
 
 SOURCES := $(wildcard $(SRCDIR)/*.c)
 OBJECTS := $(SOURCES:.c=.o)
@@ -11,7 +11,7 @@ OBJECTS := $(SOURCES:.c=.o)
 TAD_SOURCES := $(wildcard $(TADDIR)/*.c)
 TAD_OBJECTS := $(TAD_SOURCES:.c=.o)
 
-IMP_SOURCES := $(wildcard $(IMPDIR)/*.c)
+IMP_SOURCES := $(wildcard $(PRINTDIR)/*.c)
 IMP_OBJECTS := $(IMP_SOURCES:.c=.o)
 
 .PHONY: all clean
@@ -35,3 +35,6 @@ clean:
 
 cleanall: clean
 	rm -f  $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET) $(ARGS)
